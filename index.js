@@ -1,14 +1,48 @@
 function removeCharsFromString(str, charsToRemove) {
-    const pattern = new RegExp(`[${charsToRemove.join('')}]`, 'g');
-    return str.replace(pattern, '');
+    let result = '';
+    for (let i = 0; i < str.length; i++) {
+        if (!charsToRemove.includes(str[i])) {
+            result += str[i];
+        }
+    }
+    return result;
 }
 
-const inputStr = prompt("Введіть рядок:");
-const charsStr = prompt("Введіть символи для видалення (без пробілів):");
+let inputStr;
 
-const charsArray = charsStr.split('');
+while (true) {
+    inputStr = prompt("Введіть рядок:");
 
-const result = removeCharsFromString(inputStr, charsArray);
+    if (inputStr === null) {
+        alert("Шкода, що Ви не захотіли ввести рядок.");
+        continue;
+    }
 
-console.log("Результат:", result);
-alert("Результат: " + result);
+    if (inputStr.trim() === '') {
+        alert("Рядок не може бути порожнім. Спробуйте ще раз.");
+        continue;
+    }
+
+    let charsStr;
+    while (true) {
+        charsStr = prompt("Введіть символи для видалення (без пробілів):");
+
+        if (charsStr === null) {
+            alert("Шкода, що Ви не захотіли ввести символи для видалення.");
+            continue;
+        }
+
+        if (charsStr.trim() === '') {
+            alert("Символи для видалення не можуть бути порожніми.");
+            continue;
+        }
+
+        const charsArray = charsStr.split('');
+        const result = removeCharsFromString(inputStr, charsArray);
+
+        alert("Результат: " + result);
+        console.log("Результат:", result);
+        break;
+    }
+    break;
+}
